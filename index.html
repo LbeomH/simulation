@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>디지털 기업가: 스타트업 성장 시뮬레이션</title>
+  <title>이세계 스타트업: 마법과 용의 기업</title>
   <style>
     /* 기본 리셋 */
     * {
@@ -12,7 +12,7 @@
     }
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      background: linear-gradient(135deg, #2c003e, #6e00a3);
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -25,13 +25,13 @@
       padding: 20px;
       background: rgba(0, 0, 0, 0.4);
       text-align: center;
-      font-size: 26px;
+      font-size: 28px;
       font-weight: bold;
     }
     .container {
       width: 90%;
       max-width: 1000px;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
       padding: 20px;
       margin: 20px 0;
@@ -130,7 +130,7 @@
     }
     /* 미니 게임 패널 */
     .minigame {
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       border-radius: 8px;
       padding: 15px;
       text-align: center;
@@ -154,7 +154,7 @@
     }
     /* 리더보드 패널 */
     .leaderboard {
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       border-radius: 8px;
       padding: 15px;
       text-align: center;
@@ -226,47 +226,50 @@
   </style>
 </head>
 <body>
-  <header>디지털 기업가: 스타트업 성장 시뮬레이션</header>
+  <header>이세계 스타트업: 마법과 용의 기업</header>
   <div class="container" id="simulation">
     <!-- 통계 패널 -->
     <section class="stats">
-      <div>자금: $<span id="funds">0</span></div>
-      <div>총 수익률: $<span id="totalRevenueRate">1</span>/초</div>
-      <div>업체 평판: <span id="reputation">0</span></div>
+      <div>황금: $<span id="funds">0</span></div>
+      <div>총 마법 에너지: $<span id="totalRevenueRate">1</span>/초</div>
+      <div>명성: <span id="reputation">0</span></div>
     </section>
     <!-- 부서 패널 -->
     <section class="departments">
+      <!-- 마법 연구소 (기존 R&D) -->
       <div class="department" id="rndDept">
-        <h3>R&D</h3>
+        <h3>마법 연구소</h3>
         <p>레벨: <span id="rndLevel">1</span></p>
-        <p>효과: 수익률 +<span id="rndBonus">1</span></p>
-        <p>업그레이드 비용: $<span id="rndCost">50</span></p>
-        <button onclick="upgradeDepartment('rnd', this)">업그레이드</button>
+        <p>효과: 마법 에너지 +<span id="rndBonus">1</span></p>
+        <p>강화 비용: $<span id="rndCost">50</span></p>
+        <button onclick="upgradeDepartment('rnd', this)">마법 강화</button>
       </div>
+      <!-- 포션 마케팅 (기존 마케팅) -->
       <div class="department" id="marketingDept">
-        <h3>마케팅</h3>
+        <h3>포션 마케팅</h3>
         <p>레벨: <span id="marketingLevel">1</span></p>
-        <p>효과: 평판 +<span id="marketingBonus">5</span></p>
-        <p>업그레이드 비용: $<span id="marketingCost">100</span></p>
-        <button onclick="upgradeDepartment('marketing', this)">업그레이드</button>
+        <p>효과: 명성 +<span id="marketingBonus">5</span></p>
+        <p>강화 비용: $<span id="marketingCost">100</span></p>
+        <button onclick="upgradeDepartment('marketing', this)">마케팅 강화</button>
       </div>
+      <!-- 용사 서비스 (기존 고객 서비스) -->
       <div class="department" id="csDept">
-        <h3>고객 서비스</h3>
+        <h3>용사 서비스</h3>
         <p>레벨: <span id="csLevel">1</span></p>
-        <p>효과: 투자 유치 보너스 +<span id="csBonus">10</span>%</p>
-        <p>업그레이드 비용: $<span id="csCost">150</span></p>
-        <button onclick="upgradeDepartment('cs', this)">업그레이드</button>
+        <p>효과: 용의 보너스 +<span id="csBonus">10</span>%</p>
+        <p>강화 비용: $<span id="csCost">150</span></p>
+        <button onclick="upgradeDepartment('cs', this)">서비스 강화</button>
       </div>
     </section>
-    <!-- 투자 유치 섹션 -->
+    <!-- 투자 유치 섹션 (용의 보물 획득) -->
     <section class="pitch-section">
-      <h2>투자 유치</h2>
-      <p>최소 자금 요구: $<span id="pitchThreshold">500</span></p>
-      <button onclick="pitchInvestors(this)">투자 유치 실행</button>
+      <h2>용의 보물 획득</h2>
+      <p>최소 황금 요구: $<span id="pitchThreshold">500</span></p>
+      <button onclick="pitchInvestors(this)">용의 보물 획득</button>
     </section>
     <!-- 로그 출력 -->
     <section class="log" id="log">
-      <p>[로그] 게임이 시작되었습니다.</p>
+      <p>[로그] 이세계 스타트업이 시작되었습니다.</p>
     </section>
     <!-- 세이브/로드 패널 -->
     <section class="save-load">
@@ -275,50 +278,50 @@
     </section>
   </div>
 
-  <!-- 미니 게임 섹션 -->
+  <!-- 미니 게임 섹션 (마법 챌린지) -->
   <div class="container" id="minigameSection">
     <div class="minigame">
-      <h2>클릭 챌린지 (미니 게임)</h2>
+      <h2>마법 챌린지</h2>
       <p id="miniTimer">남은 시간: 10초</p>
-      <p>클릭 횟수: <span id="miniClicks">0</span></p>
-      <button id="miniStartButton" onclick="startMiniGame(this)">미니 게임 시작</button>
-      <button id="miniClickButton" onclick="incrementMiniClick(this)" disabled>클릭!</button>
+      <p>마법 주문 횟수: <span id="miniClicks">0</span></p>
+      <button id="miniStartButton" onclick="startMiniGame(this)">챌린지 시작</button>
+      <button id="miniClickButton" onclick="incrementMiniClick(this)" disabled>주문 시전!</button>
     </div>
   </div>
 
   <!-- 리더보드 섹션 -->
   <div class="container" id="leaderboardSection">
     <div class="leaderboard">
-      <h2>리더보드</h2>
+      <h2>이세계 리더보드</h2>
       <ul id="leaderboardList"></ul>
-      <button onclick="saveScore(this)">현재 자금 점수 저장</button>
+      <button onclick="saveScore(this)">현재 황금 점수 저장</button>
       <button onclick="resetLeaderboard(this)">리더보드 초기화</button>
     </div>
   </div>
 
   <script>
-    /******************** 시뮬레이션 기본 설정 ********************/
-    let funds = 0;
-    const baseRevenueRate = 1; // 기본 수익
-    let reputation = 0; // 평판
-    let totalRevenueRate = baseRevenueRate; // 총 수익
-    const pitchThreshold = 500;
+    /******************** 이세계 시뮬레이션 기본 설정 ********************/
+    let funds = 0;                   // 황금
+    const baseRevenueRate = 1;       // 기본 마법 에너지 생산
+    let reputation = 0;              // 명성
+    let totalRevenueRate = baseRevenueRate;  // 총 마법 에너지 생산량
+    const pitchThreshold = 500;      // 최소 황금 요구치
 
-    // 부서별 정보 객체
+    // 부서별 정보 (이세계 테마에 맞게 변경)
     const departments = {
-      rnd: {
+      rnd: {    // 마법 연구소
         level: 1,
-        bonus: 1,     // 수익률 증가량
+        bonus: 1,     // 마법 에너지 증가량
         cost: 50
       },
-      marketing: {
+      marketing: {   // 포션 마케팅
         level: 1,
-        bonus: 5,     // 평판 증가량
+        bonus: 5,     // 명성 증가량
         cost: 100
       },
-      cs: {
+      cs: {    // 용사 서비스
         level: 1,
-        bonus: 10,    // 투자 유치 시 보너스 퍼센트 증가
+        bonus: 10,    // 용의 보너스 퍼센트 증가
         cost: 150
       }
     };
@@ -330,15 +333,12 @@
     const logElem = document.getElementById('log');
 
     const rndLevelElem = document.getElementById('rndLevel');
-    const rndBonusElem = document.getElementById('rndBonus');
     const rndCostElem = document.getElementById('rndCost');
 
     const marketingLevelElem = document.getElementById('marketingLevel');
-    const marketingBonusElem = document.getElementById('marketingBonus');
     const marketingCostElem = document.getElementById('marketingCost');
 
     const csLevelElem = document.getElementById('csLevel');
-    const csBonusElem = document.getElementById('csBonus');
     const csCostElem = document.getElementById('csCost');
 
     /******************** 로그 출력 함수 ********************/
@@ -351,7 +351,7 @@
 
     /******************** 통계 업데이트 함수 (방치형 효과) ********************/
     function updateStats() {
-      // R&D 효과 기반 추가 수익 계산
+      // 마법 연구소 효과 기반 추가 마법 에너지 계산
       const rndEffect = departments.rnd.bonus * departments.rnd.level;
       totalRevenueRate = baseRevenueRate + rndEffect;
       funds += totalRevenueRate;
@@ -372,46 +372,46 @@
         if (dept === 'rnd') {
           rndLevelElem.textContent = department.level;
           rndCostElem.textContent = department.cost;
-          addLog(`R&D 업그레이드 완료! 레벨 ${department.level}`);
+          addLog(`마법 연구소 강화 완료! 레벨 ${department.level}`);
         } else if (dept === 'marketing') {
           marketingLevelElem.textContent = department.level;
           marketingCostElem.textContent = department.cost;
           reputation += department.bonus;
-          addLog(`마케팅 업그레이드 완료! 평판 +${department.bonus}`);
+          addLog(`포션 마케팅 강화 완료! 명성 +${department.bonus}`);
         } else if (dept === 'cs') {
           csLevelElem.textContent = department.level;
           csCostElem.textContent = department.cost;
-          addLog(`고객 서비스 업그레이드 완료! 레벨 ${department.level}`);
+          addLog(`용사 서비스 강화 완료! 레벨 ${department.level}`);
         }
         fundsElem.textContent = Math.floor(funds);
         // 버튼 애니메이션 효과 추가
         btn.classList.add('animate-pop');
         setTimeout(() => btn.classList.remove('animate-pop'), 500);
       } else {
-        alert("자금이 부족합니다!");
+        alert("황금이 부족합니다!");
       }
     }
 
-    /******************** 투자 유치 함수 ********************/
+    /******************** 투자 유치 함수 (용의 보물 획득) ********************/
     function pitchInvestors(btn) {
       if (funds >= pitchThreshold) {
-        // 고객 서비스 효과를 반영한 추가 투자 보너스 (기본 50% + cs 효과)
+        // 용사 서비스 효과를 반영한 추가 투자 보너스 (기본 50% + cs 효과)
         const csEffect = departments.cs.bonus * (departments.cs.level - 1);
         const bonusPercentage = 0.5 + (csEffect / 100);
         const bonusFunds = Math.floor(funds * bonusPercentage);
         funds += bonusFunds;
-        // 평판에 따른 수익률 보정 (매 100 평판당 +1)
+        // 명성에 따른 마법 에너지 보정 (매 100 명성당 +1)
         const repBonus = Math.floor(reputation / 100);
-        addLog(`투자 유치 성공! $${bonusFunds} 추가 확보, 기본 수익률 보정: +${repBonus}`);
+        addLog(`용의 보물 획득 성공! $${bonusFunds} 추가 확보, 생산 보정: +${repBonus}`);
         fundsElem.textContent = Math.floor(funds);
         btn.classList.add('animate-click');
         setTimeout(() => btn.classList.remove('animate-click'), 200);
       } else {
-        alert(`투자 유치를 위해 최소 $${pitchThreshold} 이상의 자금이 필요합니다.`);
+        alert(`용의 보물을 획득하려면 최소 $${pitchThreshold} 이상의 황금이 필요합니다.`);
       }
     }
 
-    /******************** 미니 게임 기능 ********************/
+    /******************** 미니 게임 기능 (마법 챌린지) ********************/
     let miniGameTime = 10;  // 10초 제한
     let miniClicks = 0;
     let miniGameInterval = null;
@@ -427,7 +427,7 @@
       miniClicksElem.textContent = miniClicks;
       miniClickButton.disabled = false;
       btn.disabled = true;
-      addLog("미니 게임 시작!");
+      addLog("마법 챌린지 시작!");
       
       miniGameInterval = setInterval(() => {
         miniGameTime--;
@@ -441,7 +441,7 @@
     function incrementMiniClick(btn) {
       miniClicks++;
       miniClicksElem.textContent = miniClicks;
-      // 클릭할 때마다 버튼 애니메이션 효과
+      // 클릭 시 애니메이션 효과
       btn.classList.add('animate-click');
       setTimeout(() => btn.classList.remove('animate-click'), 200);
     }
@@ -450,13 +450,13 @@
       clearInterval(miniGameInterval);
       miniClickButton.disabled = true;
       document.getElementById('miniStartButton').disabled = false;
-      // 추가 자금 보상: 클릭 수 * (1 + cs 레벨 보너스/100)
+      // 추가 황금 보상: 주문 횟수 * (1 + 용사 서비스 보너스/100)
       const csBonusMultiplier = 1 + (departments.cs.bonus * (departments.cs.level - 1)) / 100;
       const bonus = Math.floor(miniClicks * 10 * csBonusMultiplier);
       funds += bonus;
       fundsElem.textContent = Math.floor(funds);
-      addLog(`미니 게임 종료! 클릭 ${miniClicks}회, 보상 $${bonus}`);
-      // 초기화 타이머 문구
+      addLog(`마법 챌린지 종료! 주문 ${miniClicks}회, 보상 $${bonus}`);
+      // 타이머 및 횟수 초기화
       miniTimerElem.textContent = "남은 시간: 10초";
       miniClicksElem.textContent = "0";
     }
@@ -464,9 +464,8 @@
     /******************** 리더보드 기능 ********************/
     function getLeaderboard() {
       const scores = JSON.parse(localStorage.getItem('leaderboard')) || [];
-      // 내림차순 정렬
       scores.sort((a, b) => b - a);
-      return scores.slice(0, 5); // 상위 5개만 반환
+      return scores.slice(0, 5);
     }
 
     function displayLeaderboard() {
@@ -485,7 +484,7 @@
       scores.push(Math.floor(funds));
       localStorage.setItem('leaderboard', JSON.stringify(scores));
       displayLeaderboard();
-      addLog("현재 자금 점수 저장 완료!");
+      addLog("현재 황금 점수 저장 완료!");
       btn.classList.add('animate-click');
       setTimeout(() => btn.classList.remove('animate-click'), 200);
     }
@@ -504,7 +503,7 @@
     displayLeaderboard();
 
     /******************** 세이브/로드 기능 ********************/
-    const SAVE_KEY = 'startupGameSave';
+    const SAVE_KEY = 'fantasyStartupSave';
     
     function saveGame() {
       // 저장할 데이터 구성
@@ -527,14 +526,12 @@
         const data = JSON.parse(savedData);
         funds = data.funds;
         reputation = data.reputation;
-        // 부서 업데이트
         departments.rnd.level = data.departments.rnd.level;
         departments.rnd.cost = data.departments.rnd.cost;
         departments.marketing.level = data.departments.marketing.level;
         departments.marketing.cost = data.departments.marketing.cost;
         departments.cs.level = data.departments.cs.level;
         departments.cs.cost = data.departments.cs.cost;
-        
         // UI 갱신
         fundsElem.textContent = Math.floor(funds);
         reputationElem.textContent = reputation;
