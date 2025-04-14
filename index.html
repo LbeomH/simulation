@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>디지털 기업가: 스타트업 성장 시뮬레이션</title>
+  <style>
+    /* 기본 리셋 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    header {
+      width: 100%;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.3);
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    /* 통계 패널 */
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .stats div {
+      flex: 1 1 200px;
+      margin: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 18px;
+    }
+    /* 부서 패널 */
+    .departments {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .department {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px;
+      flex: 1 1 250px;
+      text-align: center;
+    }
+    .department h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    .department p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+    .department button {
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s;
+    }
+    .department button:hover {
+      background-color: #0056b3;
+    }
+    /* 투자 유치 패널 */
+    .pitch-section {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .pitch-section h2 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+    .pitch-section p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .pitch-section button {
+      background-color: #ff9800;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .pitch-section button:hover {
+      background-color: #e68900;
+    }
+    /* 로그 출력 패널 */
+    .log {
+      height: 150px;
+      overflow-y: auto;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 14px;
+    }
+    .log p {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>디지털 기업가: 스타트업 성장 시뮬레이션</header>
+  <div class="container">
+    <!-- 통계 패널 -->
+    <section class="stats">
+      <div>자금: $<span id="funds">0</span></div>
+      <div>총 수익률: $<span id="totalRevenueRate">1</span>/초</div>
+      <div>업체 평판: <span id="reputation">0</span></div>
+    </section>
+    <!-- 부서 패널 -->
+    <section class="departments">
+      <div class="department" id="rndDept">
+        <h3>R&D</h3>
+        <p>레벨: <span id="rndLevel">1</span></p>
+        <p>효과: 수익률 +<span id="rndBonus">1</span></p>
+        <p>업그레이드 비용: $<span id="rndCost">50</span></p>
+        <button onclick="upgradeDepartment('rnd')">업그레이드</button>
+      </div>
+      <div class="department" id="marketingDept">
+        <h3>마케팅</h3>
+        <p>레벨: <span id="marketingLevel">1</span></p>
+        <p>효과: 평판 +<span id="marketingBonus">5</span></p>
+        <p>업그레이드 비용: $<span id="marketingCost">100</span></p>
+        <button onclick="upgradeDepartment('marketing')">업그레이드</button>
+      </div>
+      <div class="department" id="csDept">
+        <h3>고객 서비스</h3>
+        <p>레벨: <span id="csLevel">1</span></p>
+        <p>효과: 투자 유치 보너스 +<span id="csBonus">10</span>%</p>
+        <p>업그레이드 비용: $<span id="csCost">150</span></p>
+        <button onclick="upgradeDepartment('cs')">업그레이드</button>
+      </div>
+    </section>
+    <!-- 투자 유치 섹션 -->
+    <section class="pitch-section">
+      <h2>투자 유치</h2>
+      <p>최소 자금 요구: $<span id="pitchThreshold">500</span></p>
+      <button onclick="pitchInvestors()">투자 유치 실행</button>
+    </section>
+    <!-- 로그 출력 -->
+    <section class="log" id="log">
+      <p>[로그] 게임이 시작되었습니다.</p>
+    </section>
+  </div>
+
+  <script>
+    // 기본 변수 설정
+    let funds = 0;
+    const baseRevenueRate = 1; // 기본 수익
+    let reputation = 0; // 평판
+    let totalRevenueRate = baseRevenueRate; // 총 수익
+    const pitchThreshold = 500;
+
+    // 부서별 정보 객체
+    const departments = {
+      rnd: {
+        level: 1,
+        bonus: 1,     // 수익률 증가량
+        cost: 50
+      },
+      marketing: {
+        level: 1,
+        bonus: 5,     // 평판 증가량
+        cost: 100
+      },
+      cs: {
+        level: 1,
+        bonus: 10,    // 투자 유치 시 보너스 퍼센트 증가
+        cost: 150
+      }
+    };
+
+    // HTML 요소 참조
+    const fundsElem = document.getElementById('funds');
+    const totalRevenueRateElem = document.getElementById('totalRevenueRate');
+    const reputationElem = document.getElementById('reputation');
+    const logElem = document.getElementById('log');
+
+    const rndLevelElem = document.getElementById('rndLevel');
+    const rndBonusElem = document.getElementById('rndBonus');
+    const rndCostElem = document.getElementById('rndCost');
+
+    const marketingLevelElem = document.getElementById('marketingLevel');
+    const marketingBonusElem = document.getElementById('marketingBonus');
+    const marketingCostElem = document.getElementById('marketingCost');
+
+    const csLevelElem = document.getElementById('csLevel');
+    const csBonusElem = document.getElementById('csBonus');
+    const csCostElem = document.getElementById('csCost');
+
+    // 로그 추가 함수
+    function addLog(message) {
+      const p = document.createElement('p');
+      p.textContent = `[로그] ${message}`;
+      logElem.appendChild(p);
+      logElem.scrollTop = logElem.scrollHeight;
+    }
+
+    // 통계 업데이트 함수: 1초마다 자금을 증가시키고 각 통계를 최신화
+    function updateStats() {
+      // R&D 효과를 기반으로 한 추가 수익
+      const rndEffect = departments.rnd.bonus * departments.rnd.level;
+      totalRevenueRate = baseRevenueRate + rndEffect;
+      funds += totalRevenueRate;
+      fundsElem.textContent = Math.floor(funds);
+      totalRevenueRateElem.textContent = totalRevenueRate;
+      reputationElem.textContent = reputation;
+    }
+
+    // 부서 업그레이드 함수
+    function upgradeDepartment(dept) {
+      const department = departments[dept];
+      if (funds >= department.cost) {
+        funds -= department.cost;
+        department.level++;
+        department.cost = Math.floor(department.cost * 1.5);
+        // 각 부서별로 UI와 효과 적용
+        if (dept === 'rnd') {
+          rndLevelElem.textContent = department.level;
+          rndCostElem.textContent = department.cost;
+          addLog(`R&D 업그레이드 완료! 레벨 ${department.level}`);
+        } else if (dept === 'marketing') {
+          marketingLevelElem.textContent = department.level;
+          marketingCostElem.textContent = department.cost;
+          // 평판 상승 효과
+          reputation += department.bonus;
+          addLog(`마케팅 업그레이드 완료! 평판 +${department.bonus}`);
+        } else if (dept === 'cs') {
+          csLevelElem.textContent = department.level;
+          csCostElem.textContent = department.cost;
+          addLog(`고객 서비스 업그레이드 완료! 레벨 ${department.level}`);
+        }
+        fundsElem.textContent = Math.floor(funds);
+      } else {
+        alert("자금이 부족합니다!");
+      }
+    }
+
+    // 투자 유치 함수: 일정 자금 이상일 때 실행하여 추가 자금과 보너스 효과 적용
+    function pitchInvestors() {
+      if (funds >= pitchThreshold) {
+        // 고객 서비스 효과를 반영한 추가 투자 보너스 (기본 50% + cs 효과)
+        const csEffect = departments.cs.bonus * (departments.cs.level - 1);
+        const bonusPercentage = 0.5 + (csEffect / 100);
+        const bonusFunds = Math.floor(funds * bonusPercentage);
+        funds += bonusFunds;
+        // 평판이 일정 수준일 때 기본 수익률 상승 (매 100 평판당 +1)
+        const repBonus = Math.floor(reputation / 100);
+        addLog(`투자 유치 성공! $${bonusFunds} 추가 확보, 기본 수익률 보정: +${repBonus}`);
+        fundsElem.textContent = Math.floor(funds);
+      } else {
+        alert(`투자 유치를 위해 최소 $${pitchThreshold} 이상의 자금이 필요합니다.`);
+      }
+    }
+
+    // 1초마다 통계 업데이트 (방치형 효과)
+    setInterval(updateStats, 1000);
+  </script>
+</body>
+</html>
