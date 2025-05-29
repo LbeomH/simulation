@@ -1,242 +1,20 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>이세계 스타트업: 마법과 용의 기업</title>
-  <style>
-    /* 기본 리셋 */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #2c003e, #6e00a3);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    header {
-      width: 100%;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.4);
-      text-align: center;
-      font-size: 28px;
-      font-weight: bold;
-    }
-    .container {
-      width: 90%;
-      max-width: 1000px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
-      padding: 20px;
-      margin: 20px 0;
-    }
-    /* 통계 패널 */
-    .stats {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    .stats div {
-      flex: 1 1 200px;
-      margin: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 15px;
-      border-radius: 8px;
-      text-align: center;
-      font-size: 18px;
-    }
-    /* 부서 패널 */
-    .departments {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    .department {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 15px;
-      margin: 10px;
-      flex: 1 1 250px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .department h3 {
-      margin-bottom: 10px;
-      font-size: 20px;
-    }
-    .department p {
-      margin: 5px 0;
-      font-size: 16px;
-    }
-    .department button {
-      background-color: #007bff;
-      border: none;
-      border-radius: 4px;
-      padding: 10px 15px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background-color 0.2s, transform 0.3s;
-    }
-    .department button:hover {
-      background-color: #0056b3;
-    }
-    /* 투자 유치 패널 */
-    .pitch-section {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .pitch-section h2 {
-      margin-bottom: 10px;
-      font-size: 22px;
-    }
-    .pitch-section p {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-    .pitch-section button {
-      background-color: #ff9800;
-      border: none;
-      border-radius: 4px;
-      padding: 12px 25px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.3s;
-    }
-    .pitch-section button:hover {
-      background-color: #e68900;
-    }
-    /* 로그 출력 패널 */
-    .log {
-      height: 150px;
-      overflow-y: auto;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-      padding: 10px;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-    .log p {
-      margin-bottom: 5px;
-    }
-    /* 미니 게임 패널 */
-    .minigame {
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 8px;
-      padding: 15px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .minigame h2 {
-      margin-bottom: 10px;
-      font-size: 22px;
-    }
-    .minigame button {
-      background-color: #28a745;
-      border: none;
-      border-radius: 4px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.3s;
-    }
-    .minigame button:hover {
-      background-color: #1e7e34;
-    }
-    /* 리더보드 패널 */
-    .leaderboard {
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 8px;
-      padding: 15px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .leaderboard h2 {
-      margin-bottom: 10px;
-      font-size: 22px;
-    }
-    .leaderboard ul {
-      list-style: none;
-      padding: 0;
-      font-size: 16px;
-    }
-    .leaderboard li {
-      margin: 5px 0;
-      padding: 5px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-    }
-    .leaderboard button {
-      background-color: #dc3545;
-      border: none;
-      border-radius: 4px;
-      padding: 8px 15px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.3s;
-      margin-top: 10px;
-    }
-    .leaderboard button:hover {
-      background-color: #c82333;
-    }
-    /* 세이브/로드 패널 */
-    .save-load {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .save-load button {
-      background-color: #6c757d;
-      border: none;
-      border-radius: 4px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      margin: 5px;
-      transition: background-color 0.2s, transform 0.3s;
-    }
-    .save-load button:hover {
-      background-color: #5a6268;
-    }
-    /* 애니메이션 효과 */
-    @keyframes upgradePop {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-    .animate-pop {
-      animation: upgradePop 0.5s ease-out;
-    }
-    @keyframes buttonClick {
-      0% { transform: scale(1); }
-      50% { transform: scale(0.9); }
-      100% { transform: scale(1); }
-    }
-    .animate-click {
-      animation: buttonClick 0.2s ease-out;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>이세계 스타트업: 마법과 용의 기업</header>
   <div class="container" id="simulation">
-    <!-- 통계 패널 -->
     <section class="stats">
       <div>황금: $<span id="funds">0</span></div>
       <div>총 마법 에너지: $<span id="totalRevenueRate">1</span>/초</div>
       <div>명성: <span id="reputation">0</span></div>
     </section>
-    <!-- 부서 패널 -->
     <section class="departments">
-      <!-- 마법 연구소 (기존 R&D) -->
       <div class="department" id="rndDept">
         <h3>마법 연구소</h3>
         <p>레벨: <span id="rndLevel">1</span></p>
@@ -244,7 +22,6 @@
         <p>강화 비용: $<span id="rndCost">50</span></p>
         <button onclick="upgradeDepartment('rnd', this)">마법 강화</button>
       </div>
-      <!-- 포션 마케팅 (기존 마케팅) -->
       <div class="department" id="marketingDept">
         <h3>포션 마케팅</h3>
         <p>레벨: <span id="marketingLevel">1</span></p>
@@ -252,7 +29,6 @@
         <p>강화 비용: $<span id="marketingCost">100</span></p>
         <button onclick="upgradeDepartment('marketing', this)">마케팅 강화</button>
       </div>
-      <!-- 용사 서비스 (기존 고객 서비스) -->
       <div class="department" id="csDept">
         <h3>용사 서비스</h3>
         <p>레벨: <span id="csLevel">1</span></p>
@@ -261,24 +37,19 @@
         <button onclick="upgradeDepartment('cs', this)">서비스 강화</button>
       </div>
     </section>
-    <!-- 투자 유치 섹션 (용의 보물 획득) -->
     <section class="pitch-section">
       <h2>용의 보물 획득</h2>
       <p>최소 황금 요구: $<span id="pitchThreshold">500</span></p>
       <button onclick="pitchInvestors(this)">용의 보물 획득</button>
     </section>
-    <!-- 로그 출력 -->
     <section class="log" id="log">
       <p>[로그] 이세계 스타트업이 시작되었습니다.</p>
     </section>
-    <!-- 세이브/로드 패널 -->
     <section class="save-load">
       <button onclick="saveGame()">게임 저장</button>
       <button onclick="loadGame()">게임 불러오기</button>
     </section>
   </div>
-
-  <!-- 미니 게임 섹션 (마법 챌린지) -->
   <div class="container" id="minigameSection">
     <div class="minigame">
       <h2>마법 챌린지</h2>
@@ -288,8 +59,6 @@
       <button id="miniClickButton" onclick="incrementMiniClick(this)" disabled>주문 시전!</button>
     </div>
   </div>
-
-  <!-- 리더보드 섹션 -->
   <div class="container" id="leaderboardSection">
     <div class="leaderboard">
       <h2>이세계 리더보드</h2>
@@ -298,254 +67,6 @@
       <button onclick="resetLeaderboard(this)">리더보드 초기화</button>
     </div>
   </div>
-
-  <script>
-    /******************** 이세계 시뮬레이션 기본 설정 ********************/
-    let funds = 0;                   // 황금
-    const baseRevenueRate = 1;       // 기본 마법 에너지 생산
-    let reputation = 0;              // 명성
-    let totalRevenueRate = baseRevenueRate;  // 총 마법 에너지 생산량
-    const pitchThreshold = 500;      // 최소 황금 요구치
-
-    // 부서별 정보 (이세계 테마에 맞게 변경)
-    const departments = {
-      rnd: {    // 마법 연구소
-        level: 1,
-        bonus: 1,     // 마법 에너지 증가량
-        cost: 50
-      },
-      marketing: {   // 포션 마케팅
-        level: 1,
-        bonus: 5,     // 명성 증가량
-        cost: 100
-      },
-      cs: {    // 용사 서비스
-        level: 1,
-        bonus: 10,    // 용의 보너스 퍼센트 증가
-        cost: 150
-      }
-    };
-
-    // HTML 요소 참조
-    const fundsElem = document.getElementById('funds');
-    const totalRevenueRateElem = document.getElementById('totalRevenueRate');
-    const reputationElem = document.getElementById('reputation');
-    const logElem = document.getElementById('log');
-
-    const rndLevelElem = document.getElementById('rndLevel');
-    const rndCostElem = document.getElementById('rndCost');
-
-    const marketingLevelElem = document.getElementById('marketingLevel');
-    const marketingCostElem = document.getElementById('marketingCost');
-
-    const csLevelElem = document.getElementById('csLevel');
-    const csCostElem = document.getElementById('csCost');
-
-    /******************** 로그 출력 함수 ********************/
-    function addLog(message) {
-      const p = document.createElement('p');
-      p.textContent = `[로그] ${message}`;
-      logElem.appendChild(p);
-      logElem.scrollTop = logElem.scrollHeight;
-    }
-
-    /******************** 통계 업데이트 함수 (방치형 효과) ********************/
-    function updateStats() {
-      // 마법 연구소 효과 기반 추가 마법 에너지 계산
-      const rndEffect = departments.rnd.bonus * departments.rnd.level;
-      totalRevenueRate = baseRevenueRate + rndEffect;
-      funds += totalRevenueRate;
-      fundsElem.textContent = Math.floor(funds);
-      totalRevenueRateElem.textContent = totalRevenueRate;
-      reputationElem.textContent = reputation;
-    }
-    setInterval(updateStats, 1000);
-
-    /******************** 부서 업그레이드 함수 ********************/
-    function upgradeDepartment(dept, btn) {
-      const department = departments[dept];
-      if (funds >= department.cost) {
-        funds -= department.cost;
-        department.level++;
-        department.cost = Math.floor(department.cost * 1.5);
-        // 부서 별 UI 및 효과 적용
-        if (dept === 'rnd') {
-          rndLevelElem.textContent = department.level;
-          rndCostElem.textContent = department.cost;
-          addLog(`마법 연구소 강화 완료! 레벨 ${department.level}`);
-        } else if (dept === 'marketing') {
-          marketingLevelElem.textContent = department.level;
-          marketingCostElem.textContent = department.cost;
-          reputation += department.bonus;
-          addLog(`포션 마케팅 강화 완료! 명성 +${department.bonus}`);
-        } else if (dept === 'cs') {
-          csLevelElem.textContent = department.level;
-          csCostElem.textContent = department.cost;
-          addLog(`용사 서비스 강화 완료! 레벨 ${department.level}`);
-        }
-        fundsElem.textContent = Math.floor(funds);
-        // 버튼 애니메이션 효과 추가
-        btn.classList.add('animate-pop');
-        setTimeout(() => btn.classList.remove('animate-pop'), 500);
-      } else {
-        alert("황금이 부족합니다!");
-      }
-    }
-
-    /******************** 투자 유치 함수 (용의 보물 획득) ********************/
-    function pitchInvestors(btn) {
-      if (funds >= pitchThreshold) {
-        // 용사 서비스 효과를 반영한 추가 투자 보너스 (기본 50% + cs 효과)
-        const csEffect = departments.cs.bonus * (departments.cs.level - 1);
-        const bonusPercentage = 0.5 + (csEffect / 100);
-        const bonusFunds = Math.floor(funds * bonusPercentage);
-        funds += bonusFunds;
-        // 명성에 따른 마법 에너지 보정 (매 100 명성당 +1)
-        const repBonus = Math.floor(reputation / 100);
-        addLog(`용의 보물 획득 성공! $${bonusFunds} 추가 확보, 생산 보정: +${repBonus}`);
-        fundsElem.textContent = Math.floor(funds);
-        btn.classList.add('animate-click');
-        setTimeout(() => btn.classList.remove('animate-click'), 200);
-      } else {
-        alert(`용의 보물을 획득하려면 최소 $${pitchThreshold} 이상의 황금이 필요합니다.`);
-      }
-    }
-
-    /******************** 미니 게임 기능 (마법 챌린지) ********************/
-    let miniGameTime = 10;  // 10초 제한
-    let miniClicks = 0;
-    let miniGameInterval = null;
-    const miniTimerElem = document.getElementById('miniTimer');
-    const miniClicksElem = document.getElementById('miniClicks');
-    const miniClickButton = document.getElementById('miniClickButton');
-
-    function startMiniGame(btn) {
-      // 초기화
-      miniGameTime = 10;
-      miniClicks = 0;
-      miniTimerElem.textContent = `남은 시간: ${miniGameTime}초`;
-      miniClicksElem.textContent = miniClicks;
-      miniClickButton.disabled = false;
-      btn.disabled = true;
-      addLog("마법 챌린지 시작!");
-      
-      miniGameInterval = setInterval(() => {
-        miniGameTime--;
-        miniTimerElem.textContent = `남은 시간: ${miniGameTime}초`;
-        if(miniGameTime <= 0) {
-          endMiniGame();
-        }
-      }, 1000);
-    }
-
-    function incrementMiniClick(btn) {
-      miniClicks++;
-      miniClicksElem.textContent = miniClicks;
-      // 클릭 시 애니메이션 효과
-      btn.classList.add('animate-click');
-      setTimeout(() => btn.classList.remove('animate-click'), 200);
-    }
-
-    function endMiniGame() {
-      clearInterval(miniGameInterval);
-      miniClickButton.disabled = true;
-      document.getElementById('miniStartButton').disabled = false;
-      // 추가 황금 보상: 주문 횟수 * (1 + 용사 서비스 보너스/100)
-      const csBonusMultiplier = 1 + (departments.cs.bonus * (departments.cs.level - 1)) / 100;
-      const bonus = Math.floor(miniClicks * 10 * csBonusMultiplier);
-      funds += bonus;
-      fundsElem.textContent = Math.floor(funds);
-      addLog(`마법 챌린지 종료! 주문 ${miniClicks}회, 보상 $${bonus}`);
-      // 타이머 및 횟수 초기화
-      miniTimerElem.textContent = "남은 시간: 10초";
-      miniClicksElem.textContent = "0";
-    }
-
-    /******************** 리더보드 기능 ********************/
-    function getLeaderboard() {
-      const scores = JSON.parse(localStorage.getItem('leaderboard')) || [];
-      scores.sort((a, b) => b - a);
-      return scores.slice(0, 5);
-    }
-
-    function displayLeaderboard() {
-      const leaderboardList = document.getElementById('leaderboardList');
-      leaderboardList.innerHTML = '';
-      const scores = getLeaderboard();
-      scores.forEach((score, index) => {
-        const li = document.createElement('li');
-        li.textContent = `${index + 1}. $${score}`;
-        leaderboardList.appendChild(li);
-      });
-    }
-
-    function saveScore(btn) {
-      const scores = JSON.parse(localStorage.getItem('leaderboard')) || [];
-      scores.push(Math.floor(funds));
-      localStorage.setItem('leaderboard', JSON.stringify(scores));
-      displayLeaderboard();
-      addLog("현재 황금 점수 저장 완료!");
-      btn.classList.add('animate-click');
-      setTimeout(() => btn.classList.remove('animate-click'), 200);
-    }
-
-    function resetLeaderboard(btn) {
-      if (confirm("리더보드를 초기화 하시겠습니까?")) {
-        localStorage.removeItem('leaderboard');
-        displayLeaderboard();
-        addLog("리더보드가 초기화되었습니다.");
-        btn.classList.add('animate-click');
-        setTimeout(() => btn.classList.remove('animate-click'), 200);
-      }
-    }
-
-    // 초기 리더보드 표시
-    displayLeaderboard();
-
-    /******************** 세이브/로드 기능 ********************/
-    const SAVE_KEY = 'fantasyStartupSave';
-    
-    function saveGame() {
-      // 저장할 데이터 구성
-      const saveData = {
-        funds: funds,
-        reputation: reputation,
-        departments: {
-          rnd: { level: departments.rnd.level, cost: departments.rnd.cost },
-          marketing: { level: departments.marketing.level, cost: departments.marketing.cost },
-          cs: { level: departments.cs.level, cost: departments.cs.cost }
-        }
-      };
-      localStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
-      addLog("게임 상태가 저장되었습니다.");
-    }
-    
-    function loadGame() {
-      const savedData = localStorage.getItem(SAVE_KEY);
-      if (savedData) {
-        const data = JSON.parse(savedData);
-        funds = data.funds;
-        reputation = data.reputation;
-        departments.rnd.level = data.departments.rnd.level;
-        departments.rnd.cost = data.departments.rnd.cost;
-        departments.marketing.level = data.departments.marketing.level;
-        departments.marketing.cost = data.departments.marketing.cost;
-        departments.cs.level = data.departments.cs.level;
-        departments.cs.cost = data.departments.cs.cost;
-        // UI 갱신
-        fundsElem.textContent = Math.floor(funds);
-        reputationElem.textContent = reputation;
-        rndLevelElem.textContent = departments.rnd.level;
-        rndCostElem.textContent = departments.rnd.cost;
-        marketingLevelElem.textContent = departments.marketing.level;
-        marketingCostElem.textContent = departments.marketing.cost;
-        csLevelElem.textContent = departments.cs.level;
-        csCostElem.textContent = departments.cs.cost;
-        addLog("저장된 게임 상태를 불러왔습니다.");
-      } else {
-        addLog("불러올 저장 데이터가 없습니다.");
-      }
-    }
-  </script>
+  <script src="logic.js"></script>
 </body>
 </html>
