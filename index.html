@@ -7,63 +7,92 @@
 </head>
 <body>
   <header>이세계 스타트업: 마법과 용의 기업</header>
-  <div class="container" id="simulation">
-    <section class="stats">
-      <div>황금: $<span id="funds">0</span></div>
-      <div>총 마법 에너지: $<span id="totalRevenueRate">1</span>/초</div>
-      <div>명성: <span id="reputation">0</span></div>
-    </section>
-    <section class="departments">
-      <div class="department" id="rndDept">
-        <h3>마법 연구소</h3>
-        <p>레벨: <span id="rndLevel">1</span></p>
-        <p>효과: 마법 에너지 +<span id="rndBonus">1</span></p>
-        <p>강화 비용: $<span id="rndCost">50</span></p>
-        <button>마법 강화</button>
+  <div class="game-container">
+    <div class="main-area">
+      <div class="character-container">
+        <img src="https://images.pexels.com/photos/7887135/pexels-photo-7887135.jpeg" alt="마법사" class="character">
+        <div class="gold-particles"></div>
       </div>
-      <div class="department" id="marketingDept">
-        <h3>포션 마케팅</h3>
-        <p>레벨: <span id="marketingLevel">1</span></p>
-        <p>효과: 명성 +<span id="marketingBonus">5</span></p>
-        <p>강화 비용: $<span id="marketingCost">100</span></p>
-        <button>마케팅 강화</button>
+      <div class="stats-panel">
+        <div>황금: $<span id="funds">0</span></div>
+        <div>총 마법 에너지: $<span id="totalRevenueRate">1</span>/초</div>
+        <div>명성: <span id="reputation">0</span></div>
       </div>
-      <div class="department" id="csDept">
-        <h3>용사 서비스</h3>
-        <p>레벨: <span id="csLevel">1</span></p>
-        <p>효과: 용의 보너스 +<span id="csBonus">10</span>%</p>
-        <p>강화 비용: $<span id="csCost">150</span></p>
-        <button>서비스 강화</button>
-      </div>
-    </section>
-    <section class="pitch-section">
-      <h2>용의 보물 획득</h2>
-      <p>최소 황금 요구: $<span id="pitchThreshold">500</span></p>
-      <button onclick="pitchInvestors(this)">용의 보물 획득</button>
-    </section>
-    <section class="log" id="log">
-      <p>[로그] 이세계 스타트업이 시작되었습니다.</p>
-    </section>
-    <section class="save-load">
-      <button>게임 저장</button>
-      <button>게임 불러오기</button>
-    </section>
-  </div>
-  <div class="container" id="minigameSection">
-    <div class="minigame">
-      <h2>마법 챌린지</h2>
-      <p id="miniTimer">남은 시간: 10초</p>
-      <p>마법 주문 횟수: <span id="miniClicks">0</span></p>
-      <button id="miniStartButton">챌린지 시작</button>
-      <button id="miniClickButton" disabled>주문 시전!</button>
     </div>
-  </div>
-  <div class="container" id="leaderboardSection">
-    <div class="leaderboard">
-      <h2>이세계 리더보드</h2>
-      <ul id="leaderboardList"></ul>
-      <button>현재 황금 점수 저장</button>
-      <button>리더보드 초기화</button>
+    
+    <div class="menu-container">
+      <div class="menu-item" id="rndDept">
+        <img src="./assets/departments/magic_lab.png" alt="마법 연구소" class="menu-icon">
+        <div class="menu-content">
+          <h3>마법 연구소</h3>
+          <p>레벨: <span id="rndLevel">1</span></p>
+          <p>효과: 마법 에너지 +<span id="rndBonus">1</span></p>
+          <p>강화 비용: $<span id="rndCost">50</span></p>
+          <button class="upgrade-btn">마법 강화</button>
+        </div>
+      </div>
+      
+      <div class="menu-item" id="marketingDept">
+        <img src="./assets/departments/potion_marketing2.png" alt="포션 마케팅" class="menu-icon">
+        <div class="menu-content">
+          <h3>포션 마케팅</h3>
+          <p>레벨: <span id="marketingLevel">1</span></p>
+          <p>효과: 명성 +<span id="marketingBonus">5</span></p>
+          <p>강화 비용: $<span id="marketingCost">100</span></p>
+          <button class="upgrade-btn">마케팅 강화</button>
+        </div>
+      </div>
+      
+      <div class="menu-item" id="csDept">
+        <img src="./assets/departments/hero_service2.png" alt="용사 서비스" class="menu-icon">
+        <div class="menu-content">
+          <h3>용사 서비스</h3>
+          <p>레벨: <span id="csLevel">1</span></p>
+          <p>효과: 용의 보너스 +<span id="csBonus">10</span>%</p>
+          <p>강화 비용: $<span id="csCost">150</span></p>
+          <button class="upgrade-btn">서비스 강화</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bottom-container">
+      <div class="action-panel">
+        <div class="pitch-section">
+          <img src="./assets/actions/dragon_treasure.png" alt="용의 보물" class="action-icon">
+          <h2>용의 보물 획득</h2>
+          <p>최소 황금 요구: $<span id="pitchThreshold">500</span></p>
+          <button onclick="pitchInvestors(this)">용의 보물 획득</button>
+        </div>
+        
+        <div class="minigame">
+          <img src="./assets/actions/magic_challenge.png" alt="마법 챌린지" class="action-icon">
+          <h2>마법 챌린지</h2>
+          <p id="miniTimer">남은 시간: 10초</p>
+          <p>마법 주문 횟수: <span id="miniClicks">0</span></p>
+          <button id="miniStartButton">챌린지 시작</button>
+          <button id="miniClickButton" disabled>주문 시전!</button>
+        </div>
+      </div>
+      
+      <div class="log-container">
+        <div class="log" id="log">
+          <p>[로그] 이세계 스타트업이 시작되었습니다.</p>
+        </div>
+      </div>
+      
+      <div class="control-panel">
+        <div class="save-load">
+          <button>게임 저장</button>
+          <button>게임 불러오기</button>
+        </div>
+        
+        <div class="leaderboard">
+          <h2>이세계 리더보드</h2>
+          <ul id="leaderboardList"></ul>
+          <button>현재 황금 점수 저장</button>
+          <button>리더보드 초기화</button>
+        </div>
+      </div>
     </div>
   </div>
   <script type="module" src="src/main.js"></script>
