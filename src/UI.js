@@ -106,7 +106,7 @@ export class UI {
   }
 
   createGoldGainEffect(amount) {
-    const statsElement = document.querySelector('.stats');
+    const statsElement = document.querySelector('.stats-panel');
     const effect = document.createElement('div');
     effect.className = 'gold-gain';
     effect.textContent = `+$${Math.floor(amount)}`;
