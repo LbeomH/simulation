@@ -40,6 +40,12 @@ export class UI {
     this.game.on('statsUpdated', state => this.updateStats(state));
     this.game.on('departmentUpgraded', data => this.updateDepartment(data));
     this.game.on('gameStarted', () => this.addLog('이세계 스타트업이 시작되었습니다.'));
+    this.game.on('miniGameStarted', () => this.addLog('마법 챌린지 시작!'));
+    this.game.on('miniGameEnded', data => this.addLog(`마법 챌린지 종료! 주문 ${data.clicks}회, 보상 $${data.bonus}`));
+    this.game.on('scoresSaved', () => this.addLog('현재 황금 점수 저장 완료!'));
+    this.game.on('scoresReset', () => this.addLog('리더보드가 초기화되었습니다.'));
+    this.game.on('gameSaved', () => this.addLog('게임 상태가 저장되었습니다.'));
+    this.game.on('gameLoaded', () => this.addLog('저장된 게임 상태를 불러왔습니다.'));
   }
 
   updateStats(state) {

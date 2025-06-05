@@ -15,6 +15,7 @@ export class Game {
     };
 
     this.eventEmitter = new EventEmitter();
+    this.setupSaveLoad();
   }
 
   start() {
@@ -43,6 +44,43 @@ export class Game {
       return true;
     }
     return false;
+  }
+
+  setupSaveLoad() {
+    const saveButton = document.querySelector('.save-load button:first-of-type');
+    const loadButton = document.querySelector('.save-load button:last-of-type');
+    
+    saveButton.onclick = () => this.saveGame();
+    loadButton.onclick = () => this.loadGame();
+  }
+
+  saveGame() {
+    const saveData = {
+      state: this.state,
+      departments: Object.fromEntries(
+        Object.entries(this.departments).map(([key, dept]) => [
+          key,
+          { level: dept.level, cost: dept.cost }
+        ])
+      )
+    };
+    localStorage.setItem('fantasyStartupSave', JSON.stringify(saveData));
+    this.emit('gameSaved');
+  }
+
+  loadGame() {
+    const savedData = localStorage.getItem('fantasyStartupSave');
+    if (savedData) {
+      const data = JSON.parse(savedData);
+      this.state = data.state;
+      
+      Object.entries(data.departments).forEach(([key, dept]) => {
+        this.departments[key].level = dept.level;
+        this.departments[key].cost = dept.cost;
+      });
+      
+      this.emit('gameLoaded', { state: this.state, departments: this.departments });
+    }
   }
 
   emit(event, data) {
